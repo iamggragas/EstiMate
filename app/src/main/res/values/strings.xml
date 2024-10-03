@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Main</string>
+    <string name="logo">Logo </string>
+    <string name="name">User name</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="App">EstiMate</string>
+    <string name="log_in">Log in</string>
+    <string name="terms_and_conditions_text">
+        I. Introduction.\n
+        Welcome to EstiMate. By accessing or using our application, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, you must not use our application. \n \n
+        II. Definitions. \n
+        “Service” refers to the services provided by EstiMate through the application.
+        “User” refers to any individual who accesses the application. \n \n
+        III. Acceptance of Terms \n
+        By using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree, please do not use our Service. \n \n
+        IV. Changes to Terms \n
+        We reserve the right, at our sole discretion, to modify these Terms at any time. We will notify you of any changes by posting the new Terms on this page. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. \n \n
+        V. User Responsibilities \n
+        You agree to:
+        Use the Service only for lawful purposes.
+        Not engage in any conduct that restricts or inhibits anyone’s use or enjoyment of the Service.
+        Not use the Service to transmit any unauthorized or unsolicited advertising, promotional materials, spam, or any other form of solicitation.\n \n
+        VI. Intellectual Property \n
+        All content, trademarks, and other intellectual property rights in the Service are owned by or licensed to [Your Company Name]. You may not use any of the content or materials for any commercial purposes without our prior written consent. \n \n
+        VII. Limitation of Liability \n
+        To the fullest extent permitted by law, Estimate shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of the Service, including but not limited to loss of profits, data, or other intangible losses. \n \n
+        VIII. Governing Law \n
+        These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law principles. \n \n
+        IX. Dispute Resolution \n
+        Any disputes arising out of or relating to these Terms will be resolved through binding arbitration in accordance with the rules of Court. \n \n
+        X. Contact Information \n
+        For any questions or concerns regarding these Terms and Conditions, please contact us at: \n
+        Phone Number: 999-999-9999 \n
+        Email: info@estimate.org \n
+        Address: 999 Ninth Str cor 999 Ninth Blvd, Lucky Nine \n
+    </string>
+    <string name="have_already_an_account_log_in">Have already an Account? Log In</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="don_t_have_already_an_account_sign_up">Don\'t have already an Account? Sign Up</string>
+</resources>
