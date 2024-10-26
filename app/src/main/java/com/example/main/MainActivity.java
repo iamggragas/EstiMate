@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSignUp = findViewById(R.id.btnSignUp);
 
-        auth = FirebaseAuth.getInstance();
+        // auth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Users");
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String name = editName.getText().toString().trim();
                 String phone = editPhone.getText().toString().trim();
                 String email = editEmail.getText().toString().trim();
@@ -49,17 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     checkFields(name, phone, email, password);
                 } else {
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "User Sign Up Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this, Login.class));
-                            } else {
-                                Toast.makeText(getApplicationContext(), "User Sign Up Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    HelperClass helperClass = new HelperClass(name, phone, email, password);
+                    reference.child(name).setValue(helperClass);
+
+                    Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
                 }
             }
         });

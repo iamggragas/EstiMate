@@ -16,18 +16,26 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private EditText editEmail, editPassword;
+    private EditText editName, editPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        editEmail = findViewById(R.id.editEmail);
+        editName = findViewById(R.id.editName);
         editPassword = findViewById(R.id.editPassword);
 
         TextView signUp = findViewById(R.id.signUp);
@@ -35,35 +43,43 @@ public class Login extends AppCompatActivity {
 
         Button btnLogIn = findViewById(R.id.btnLogIn);
 
-        auth = FirebaseAuth.getInstance();
-
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editEmail.getText().toString().trim();
+                String name = editName.getText().toString().trim();
                 String password = editPassword.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    checkFields(email, password);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                Query checkUser = reference.orderByChild("name").equalTo(name);
+
+                if (name.isEmpty() || password.isEmpty()) {
+                    checkFields(name, password);
                 } else {
-                    if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        auth.signInWithEmailAndPassword(email, password)
-                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(getApplicationContext(), "User Log In Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(Login.this, TermsAndCondition.class));
-                                    }
-                                }).addOnFailureListener(new OnFailureListener()  {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getApplicationContext(), "User Log In Failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        editEmail.setError("Please enter a valid email");
-                        editEmail.requestFocus();
-                    }
+                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                editName.setError(null);
+                                String passwordFromDB = snapshot.child(name).child("password").getValue(String.class);
+
+                                if (passwordFromDB.equals(password)) {
+                                    editPassword.setError(null);
+                                    Intent intent = new Intent(Login.this, TermsAndCondition.class);
+                                    startActivity(intent);
+                                } else {
+                                    editPassword.setError("Invalid Credentials");
+                                    editPassword.requestFocus();
+                                }
+                            } else {
+                                editName.setError("User does not exist");
+                                editName.requestFocus();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
         });
@@ -85,10 +101,10 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void checkFields(String email, String password) {
-        if (email.isEmpty()) {
-            editEmail.setError("Please enter an email");
-            editEmail.requestFocus();
+    private void checkFields(String name, String password) {
+        if (name.isEmpty()) {
+            editName.setError("Please enter an email");
+            editName.requestFocus();
         }
 
         if (password.isEmpty()) {
