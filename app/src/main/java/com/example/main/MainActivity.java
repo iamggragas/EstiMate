@@ -8,20 +8,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.main.Utilities.HelperClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
     private EditText editName, editPhone, editEmail, editPassword;
+    private String name, phone, email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String name = editName.getText().toString().trim();
-                String phone = editPhone.getText().toString().trim();
-                String email = editEmail.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
+                name = editName.getText().toString().trim();
+                phone = editPhone.getText().toString().trim();
+                email = editEmail.getText().toString().trim();
+                password = editPassword.getText().toString().trim();
 
                 if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     checkFields(name, phone, email, password);

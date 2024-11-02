@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.Utilities;
 
 public class HelperClass {
         String name, email, phone, password;

@@ -29,6 +29,9 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText editName, editPassword;
+    private String name, password, passwordFromDB, nameFromDB, phoneFromDB, emailFromDB;
+    private DatabaseReference reference;
+    Query checkUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +49,11 @@ public class Login extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editName.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
+                name = editName.getText().toString().trim();
+                password = editPassword.getText().toString().trim();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-                Query checkUser = reference.orderByChild("name").equalTo(name);
+                reference = FirebaseDatabase.getInstance().getReference("Users");
+                checkUser = reference.orderByChild("name").equalTo(name);
 
                 if (name.isEmpty() || password.isEmpty()) {
                     checkFields(name, password);
@@ -60,11 +63,23 @@ public class Login extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
                                 editName.setError(null);
-                                String passwordFromDB = snapshot.child(name).child("password").getValue(String.class);
+                                passwordFromDB = snapshot.child(name).child("password").getValue(String.class);
 
                                 if (passwordFromDB.equals(password)) {
                                     editPassword.setError(null);
-                                    Intent intent = new Intent(Login.this, TermsAndCondition.class);
+
+                                    // Pass data through intent
+                                    nameFromDB = snapshot.child(name).child("name").getValue(String.class);
+                                    phoneFromDB = snapshot.child(name).child("phone").getValue(String.class);
+                                    emailFromDB = snapshot.child(name).child("email").getValue(String.class);
+
+                                    Intent intent = new Intent(Login.this, Profile.class);
+
+                                    intent.putExtra("name", nameFromDB);
+                                    intent.putExtra("phone", phoneFromDB);
+                                    intent.putExtra("email", emailFromDB);
+                                    intent.putExtra("password", passwordFromDB);
+
                                     startActivity(intent);
                                 } else {
                                     editPassword.setError("Invalid Credentials");
