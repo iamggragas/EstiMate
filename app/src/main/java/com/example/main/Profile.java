@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class Profile extends AppCompatActivity {
 //        animationDrawable.start();
 
         Button updateBtn = findViewById(R.id.updateBtn);
+        ImageButton addListingsBtn = findViewById(R.id.addListingsBtn);
         ImageView profilePic = findViewById(R.id.profilePic);
 
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -53,12 +55,27 @@ public class Profile extends AppCompatActivity {
         showData();
         profilePic.setImageResource(R.drawable.default_profile);
 
+        // Update Profile
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isPhoneChanged() || isEmailChanged() || isPasswordChanged()) {
                     Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        // Will go to add listings activity
+        addListingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, AddListings.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("email", email);
+
+                startActivity(intent);
             }
         });
     }

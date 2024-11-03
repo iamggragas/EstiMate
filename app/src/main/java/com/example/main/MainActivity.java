@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.main.Utilities.HelperClass;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.main.Utilities.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -51,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     checkFields(name, phone, email, password);
                 } else {
-                    HelperClass helperClass = new HelperClass(name, phone, email, password);
-                    reference.child(name).setValue(helperClass);
+                    User user = new User(name, phone, email, password);
+                    reference.child(name).setValue(user);
 
                     Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, Login.class);

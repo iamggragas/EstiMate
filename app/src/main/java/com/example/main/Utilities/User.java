@@ -1,6 +1,6 @@
 package com.example.main.Utilities;
 
-public class HelperClass {
+public class User {
         String name, email, phone, password;
 
         public String getName() {
@@ -35,14 +35,14 @@ public class HelperClass {
             this.password = password;
         }
 
-        public HelperClass(String name, String phone, String email, String password) {
+        public User(String name, String phone, String email, String password) {
             this.name = name;
             this.phone = phone;
             this.email = email;
             this.password = password;
         }
 
-        public HelperClass() {
+        public User() {
         }
 
 }
