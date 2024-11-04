@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.main.Utilities.House;
 import com.example.main.Utilities.HousePrediction;
+import com.example.main.Utilities.Listings;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddListings extends AppCompatActivity {
 
@@ -21,7 +24,7 @@ public class AddListings extends AppCompatActivity {
     private double price;
     private String houseSize, houseName, houseAddress, bedroom, quality, age;
 
-    String name;
+    String ownerName;
 
     private ImageView uploadImg;
     private EditText edtHouseName, edtHouseAddress, edtArea, edtNumBedroom, edtQuality, edtAge;
@@ -44,6 +47,19 @@ public class AddListings extends AppCompatActivity {
         saveListingBtn = findViewById(R.id.saveListingBtn);
 
         uploadImg = findViewById(R.id.uploadImg);
+
+        ownerName = getIntent().getStringExtra("name");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Listings");
+
+        saveListingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Listings listings = new Listings(vHouseSize, vBedroom, vQuality, vAge, price, houseName, houseAddress);
+                reference.child(ownerName).child(houseName).setValue(listings);
+            }
+        });
     }
 
     public void predictPrice(View view) {
@@ -81,6 +97,7 @@ public class AddListings extends AppCompatActivity {
 
                 predictedPrice.setVisibility(View.VISIBLE);
                 predictedPrice.setText("Php " + String.format("%.2f", price));
+                saveListingBtn.setVisibility(View.VISIBLE);
             } catch (NumberFormatException e) {
                 Toast.makeText(getApplicationContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();
             }
