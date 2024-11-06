@@ -1,9 +1,11 @@
 package com.example.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ public class AddListings extends AppCompatActivity {
     private double vAge;
     private double price;
     private String houseSize, houseName, houseAddress, bedroom, quality, age;
+    private String name, phone, email, password;
 
     String ownerName;
 
@@ -46,6 +49,8 @@ public class AddListings extends AppCompatActivity {
         predictedPrice = findViewById(R.id.predictedPrice);
         saveListingBtn = findViewById(R.id.saveListingBtn);
 
+        ImageButton backBtn = findViewById(R.id.backBtn);
+
         uploadImg = findViewById(R.id.uploadImg);
 
         ownerName = getIntent().getStringExtra("name");
@@ -53,11 +58,45 @@ public class AddListings extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Listings");
 
+        Intent intent = getIntent();
+
+        name = intent.getStringExtra("name");
+        phone = intent.getStringExtra("phone");
+        email = intent.getStringExtra("email");
+        password = intent.getStringExtra("password");
+
+
         saveListingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Listings listings = new Listings(vHouseSize, vBedroom, vQuality, vAge, price, houseName, houseAddress);
                 reference.child(ownerName).child(houseName).setValue(listings);
+
+                Toast.makeText(getApplicationContext(), "Listing Saved", Toast.LENGTH_SHORT).show();
+
+                edtHouseName.setText("");
+                edtHouseAddress.setText("");
+                edtArea.setText("");
+                edtNumBedroom.setText("");
+                edtQuality.setText("");
+                edtAge.setText("");
+
+                predictedPrice.setVisibility(View.GONE);
+                saveListingBtn.setVisibility(View.GONE);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddListings.this, Profile.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("email", email);
+                intent.putExtra("password", password);
+
+                startActivity(intent);
             }
         });
     }
