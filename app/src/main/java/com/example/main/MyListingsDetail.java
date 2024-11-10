@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MyListingsDetail extends AppCompatActivity {
 
-    private TextView houseName, houseAddress, price, area, bedroom, quality, age;
+    private TextView houseName, houseAddress, price, area, bedroom, quality, age, ownerName, phoneNumber, emailAddress;
     private String name, phone, email, password;
     ImageButton backBtn;
 
@@ -29,6 +29,10 @@ public class MyListingsDetail extends AppCompatActivity {
         quality = findViewById(R.id.quality);
         age = findViewById(R.id.age);
 
+        ownerName = findViewById(R.id.owner);
+        phoneNumber = findViewById(R.id.phone);
+        emailAddress = findViewById(R.id.email);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             houseName.setText(extras.getString("houseName"));
@@ -43,6 +47,10 @@ public class MyListingsDetail extends AppCompatActivity {
             phone = extras.getString("phone");
             email = extras.getString("email");
             password = extras.getString("password");
+
+            ownerName.setText(name);
+            phoneNumber.setText(phone);
+            emailAddress.setText(email);
         }
 
         backBtn.setOnClickListener(new View.OnClickListener() {

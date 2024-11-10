@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ public class MyListings extends AppCompatActivity {
     List<Listings> myListings;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
+    SearchView searchView;
+    MyListingsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +65,14 @@ public class MyListings extends AppCompatActivity {
         ImageButton backBtn = findViewById(R.id.backBtn);
         FloatingActionButton fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         myListings = new ArrayList<>();
-        MyListingsAdapter adapter = new MyListingsAdapter(this, myListings, name, phone, email, password);
+        adapter = new MyListingsAdapter(this, myListings, name, phone, email, password);
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Listings").child(name);
@@ -88,6 +93,18 @@ public class MyListings extends AppCompatActivity {
             }
         });
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,4 +135,15 @@ public class MyListings extends AppCompatActivity {
         });
     }
 
+    public void searchList(String text) {
+        ArrayList<Listings> searchList = new ArrayList<>();
+
+        for (Listings listing: myListings) {
+            if (listing.getHouseName().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(listing);
+            }
+        }
+
+        adapter.searchListings(searchList);
+    }
 }

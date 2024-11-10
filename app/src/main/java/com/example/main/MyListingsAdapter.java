@@ -70,6 +70,11 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return myListings.size();
     }
+
+    public void searchListings(ArrayList<Listings> searchList) {
+        myListings = searchList;
+        notifyDataSetChanged();
+    }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
