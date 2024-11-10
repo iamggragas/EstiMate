@@ -82,6 +82,7 @@ public class MyListings extends AppCompatActivity {
                 myListings.clear();
                 for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
                     Listings listings = itemSnapshot.getValue(Listings.class);
+                    listings.setKey(itemSnapshot.getKey());
                     myListings.add(listings);
                 }
                 adapter.notifyDataSetChanged();

@@ -4,15 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MyListingsDetail extends AppCompatActivity {
 
     private TextView houseName, houseAddress, price, area, bedroom, quality, age, ownerName, phoneNumber, emailAddress;
     private String name, phone, email, password;
     ImageButton backBtn;
+
+    private FloatingActionButton fabMain, fabEdit, fabDelete;
+    private RelativeLayout fabOptions;
+    private boolean isFabOpen = false;
+
+    String key = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,11 @@ public class MyListingsDetail extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phone);
         emailAddress = findViewById(R.id.email);
 
+        fabMain = findViewById(R.id.fab_main);
+        fabEdit = findViewById(R.id.fab_edit);
+        fabDelete = findViewById(R.id.fab_delete);
+        fabOptions = findViewById(R.id.fab_options);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             houseName.setText(extras.getString("houseName"));
@@ -51,7 +69,45 @@ public class MyListingsDetail extends AppCompatActivity {
             ownerName.setText(name);
             phoneNumber.setText(phone);
             emailAddress.setText(email);
+
+            key = extras.getString("key");
         }
+
+        fabMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleFabMenu();
+            }
+        });
+
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Perform edit action
+                toggleFabMenu();
+            }
+        });
+
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Listings").child(name);
+                reference.child(key).removeValue();
+
+                Toast.makeText(MyListingsDetail.this, "Listing Deleted", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MyListingsDetail.this, MyListings.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("email", email);
+                intent.putExtra("password", password);
+
+                startActivity(intent);
+
+                toggleFabMenu();
+            }
+        });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,5 +122,15 @@ public class MyListingsDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void toggleFabMenu() {
+        if (isFabOpen) {
+            fabOptions.setVisibility(View.GONE); // Hide options
+            isFabOpen = false;
+        } else {
+            fabOptions.setVisibility(View.VISIBLE); // Show options
+            isFabOpen = true;
+        }
     }
 }

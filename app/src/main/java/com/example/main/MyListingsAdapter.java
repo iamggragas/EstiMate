@@ -61,6 +61,8 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("email", email);
                 intent.putExtra("password", password);
 
+                intent.putExtra("key", myListings.get(holder.getAdapterPosition()).getKey());
+
                 context.startActivity(intent);
             }
         });

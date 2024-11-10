@@ -8,6 +8,7 @@ public class Listings {
     double price;
 
     String houseName, houseAddress;
+    private String key;
 
     public Listings(double size, int bedrooms, int quality, double age, double price, String houseName, String houseAddress) {
         this.size = size;
@@ -77,5 +78,13 @@ public class Listings {
 
     public void setHouseAddress(String houseAddress) {
         this.houseAddress = houseAddress;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

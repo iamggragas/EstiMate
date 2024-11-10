@@ -37,8 +37,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="342dp"
-        android:layout_height="540dp"
+        android:layout_width="346dp"
+        android:layout_height="610dp"
         android:scrollbarSize="2dp"
         android:verticalScrollbarPosition="defaultPosition"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#330017FF"
+            app:cardBackgroundColor="#6BEA5F25"
             app:cardCornerRadius="30dp"
             app:cardElevation="30dp">
 
@@ -133,9 +133,8 @@
                         android:id="@+id/predictPriceBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Predict Price"
                         android:onClick="predictPrice"
-                        />
+                        android:text="Predict Price" />
 
                     <Button
                         android:id="@+id/predictedPrice"

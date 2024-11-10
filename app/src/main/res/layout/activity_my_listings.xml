@@ -56,15 +56,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="567dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="409dp"
+        android:layout_height="691dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -75,8 +73,7 @@
         android:layout_margin="40dp"
         android:src="@drawable/ic_addbtn"
         android:backgroundTint="#BFDEAB"
-        android:tint="#F6F6F6"
-        />
+        android:tint="#F6F6F6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
