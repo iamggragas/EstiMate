@@ -24,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a Listing"
+        android:text="Update Listing"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
-                    android:text="House Size"
+                    android:text="House Area"
                     android:textColor="#FFFFFF"/>
 
                 <EditText
@@ -117,7 +117,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
-                    android:text="Number of Bedrooms"
+                    android:text="Number of Bedroom"
                     android:textColor="#FFFFFF"/>
 
                 <EditText
@@ -147,8 +147,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
-                    android:text="Age (in years)"
-                    android:textColor="#FFFFFF"/>
+                    android:text="Age (years)"
+                    android:textColor="#FFFFFF" />
 
                 <EditText
                     android:id="@+id/edtAge"
@@ -156,6 +156,15 @@
                     android:layout_height="60dp"
                     android:hint="Age (in years)"
                     android:paddingBottom="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8591F5" />
+
+                <TextView
+                    android:id="@+id/edtPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingBottom="10dp"
+                    android:text="Old Price"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8591F5" />
 
@@ -170,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:onClick="predictPrice"
-                        android:text="Predict Price" />
+                        android:text="Predict New Price" />
 
                     <Button
                         android:id="@+id/predictedPrice"

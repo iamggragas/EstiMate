@@ -83,7 +83,17 @@ public class MyListingsDetail extends AppCompatActivity {
         fabEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Perform edit action
+                Intent intent = new Intent(MyListingsDetail.this, UpdateMyListings.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("email", email);
+                intent.putExtra("password", password);
+
+                intent.putExtra("houseName", houseName.getText().toString());
+
+                startActivity(intent);
+
                 toggleFabMenu();
             }
         });
