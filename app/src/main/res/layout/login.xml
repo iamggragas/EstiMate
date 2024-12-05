@@ -51,9 +51,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:autofillHints="johndoe@email.com"
+                android:autofillHints="John Doe"
                 android:ems="10"
                 android:hint="@string/name"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textColorHint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:autofillHints="john.adams@example-pet-store.com"
+                android:ems="10"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="#000000"
                 android:textColorHint="#FFFFFF" />
@@ -88,10 +100,25 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:padding="5dp"
         android:text="@string/don_t_have_already_an_account_sign_up"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/requestPasswordReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5dp"
+        android:text="Forget Password?"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/terms"
@@ -99,9 +126,11 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:padding="5dp"
         android:text="@string/terms_and_conditions"
         android:layout_marginTop="12dp"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

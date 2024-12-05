@@ -8,16 +8,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.main.Utilities.PasswordHash;
 import com.example.main.Utilities.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText editName, editPhone, editEmail, editPassword;
-    private String name, phone, email, password;
+    private String name, phone, email, password, newPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSignUp = findViewById(R.id.btnSignUp);
 
-        // auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Users");
 
@@ -47,13 +53,24 @@ public class MainActivity extends AppCompatActivity {
                 email = editEmail.getText().toString().trim();
                 password = editPassword.getText().toString().trim();
 
+                // hashing password
+                newPassword = new PasswordHash().hashPasswordSHA256(password);
+
                 if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     checkFields(name, phone, email, password);
                 } else {
-                    User user = new User(name, phone, email, password);
+                    // Saving to firebase authentication
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    // Saving to realtime database
+                    User user = new User(name, phone, email, newPassword);
                     reference.child(name).setValue(user);
 
-                    Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, Login.class);
                     startActivity(intent);
                 }

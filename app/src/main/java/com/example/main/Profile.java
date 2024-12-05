@@ -18,6 +18,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +33,8 @@ public class Profile extends AppCompatActivity {
     private ImageView profilePic;
     private String name, phone, email, password;
     private DatabaseReference reference;
-    private Button seePostsBtn, seeListingsBtn;
+    private FirebaseAuth auth;
+    private Button seePostsBtn, seeListingsBtn, reqPasswordResetBtn, updateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +44,16 @@ public class Profile extends AppCompatActivity {
         editName = findViewById(R.id.editName);
         editPhone = findViewById(R.id.editPhone);
         editEmail = findViewById(R.id.editEmail);
-        editPassword = findViewById(R.id.editPassword);
 
-        Button updateBtn = findViewById(R.id.updateBtn);
+        updateBtn = findViewById(R.id.updateBtn);
         seeListingsBtn = findViewById(R.id.seeListingsBtn);
         seePostsBtn = findViewById(R.id.seePostsBtn);
+        reqPasswordResetBtn = findViewById(R.id.reqPasswordResetBtn);
+
         ImageButton addListingsBtn = findViewById(R.id.addListingsBtn);
         ImageView profilePic = findViewById(R.id.profilePic);
 
+        auth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
         showData();
@@ -57,7 +63,7 @@ public class Profile extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isPhoneChanged() || isEmailChanged() || isPasswordChanged()) {
+                if (isPhoneChanged() || isEmailChanged()) {
                     Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -72,7 +78,6 @@ public class Profile extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
                 intent.putExtra("email", email);
-                intent.putExtra("password", password);
 
                 startActivity(intent);
             }
@@ -87,9 +92,16 @@ public class Profile extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
                 intent.putExtra("email", email);
-                intent.putExtra("password", password);
 
                 startActivity(intent);
+            }
+        });
+
+        // reset password
+        reqPasswordResetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPassword();
             }
         });
     }
@@ -100,12 +112,10 @@ public class Profile extends AppCompatActivity {
         name = intent.getStringExtra("name");
         phone = intent.getStringExtra("phone");
         email = intent.getStringExtra("email");
-        password = intent.getStringExtra("password");
 
         editName.setText(name);
         editPhone.setText(phone);
         editEmail.setText(email);
-        editPassword.setText(password);
 
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Listings").child(name);
 
@@ -145,13 +155,17 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-    public boolean isPasswordChanged() {
-        if (!password.equals(editPassword.getText().toString())) {
-            reference.child(name).child("password").setValue(editPassword.getText().toString());
-            password = editPassword.getText().toString();
-            return true;
-        } else {
-            return false;
-        }
+    public void resetPassword() {
+        auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(Profile.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 }
