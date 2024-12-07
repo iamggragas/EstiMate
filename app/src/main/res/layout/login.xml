@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/onboarding_background"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#65557C"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -22,15 +21,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#BBAED5"
             android:gravity="center_horizontal"
-            android:background="#00FFFFFF"
             android:orientation="vertical"
             android:padding="24dp">
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="67dp"
+                android:layout_height="95dp"
                 android:contentDescription="@string/logo"
                 app:srcCompat="@drawable/logoipsum_327" />
 
@@ -105,7 +104,7 @@
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/requestPasswordReset"
@@ -124,13 +123,13 @@
         android:id="@+id/terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="5dp"
         android:text="@string/terms_and_conditions"
-        android:layout_marginTop="12dp"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 </LinearLayout>
