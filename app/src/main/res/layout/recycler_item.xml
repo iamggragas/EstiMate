@@ -8,9 +8,9 @@
     android:layout_marginVertical="10dp"
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
+    app:cardBackgroundColor="#BBAED5"
     app:cardCornerRadius="20dp"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="#C2DC1B">
+    app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_marginStart="20dp"
             android:padding="8dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/default_house" />
+            android:src="@drawable/w800x533" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="House Name"
-                    android:textColor="#8591F5"
+                    android:textColor="#0B0000"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -70,11 +70,11 @@
 
                 <TextView
                     android:id="@+id/houseAddress"
-                    android:layout_width="match_parent"
+                    android:layout_width="89dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="House Address"
-                    android:textColor="#8591F5"
+                    android:textColor="#0B0000"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="House Price"
-                    android:textColor="#8591F5"
+                    android:textColor="#0B0000"
                     android:textSize="14sp" />
 
             </LinearLayout>

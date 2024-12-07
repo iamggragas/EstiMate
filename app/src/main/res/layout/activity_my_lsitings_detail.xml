@@ -6,38 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyListingsDetail"
-    android:background="@drawable/bg">
+    android:background="#65557C">
+
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="42dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_backbtn" />
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:text="Listing Details"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
+        android:textColor="#F6F0F0"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.394"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="342dp"
-        android:layout_height="737dp"
+        android:layout_width="350dp"
+        android:layout_height="637dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
+                    android:background="#E4DBF0"
                     android:padding="20dp">
 
                     <ImageView
@@ -70,7 +72,7 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/default_house" />
+                        android:src="@drawable/w800x533" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -90,9 +92,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="House Name"
-                            android:textColor="#8591F5"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textColor="#0B0000"
+                            android:textSize="20dp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
 
@@ -114,8 +116,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="House Address"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -137,8 +139,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="House Price"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -160,8 +162,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Area"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -183,8 +185,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Bedroom"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -206,8 +208,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Quality"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -225,12 +227,12 @@
 
                         <TextView
                             android:id="@+id/age"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Age"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -251,6 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="#E4DBF0"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -259,8 +262,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Contact Information"
-                        android:textColor="#fff"
-                        android:textSize="15sp" />
+                        android:textColor="#0B0000"
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -280,8 +283,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Owner Name"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -303,8 +306,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Phone Number"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -326,8 +329,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Email"
-                            android:textColor="#8591F5"
-                            android:textSize="18sp" />
+                            android:textColor="#0B0000"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -350,7 +353,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="40dp"
-            android:backgroundTint="#BFDEAB"
+            android:backgroundTint="#8C62D1"
             android:src="@drawable/ic_list"
             android:tint="#F6F6F6"
             app:fabSize="normal" />
@@ -394,7 +397,5 @@
 
 
     </RelativeLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

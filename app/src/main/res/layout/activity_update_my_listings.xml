@@ -5,13 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="#BBAED5"
+    android:backgroundTint="#BBAED5"
     tools:context=".AddListings">
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="42sp"
+        android:layout_height="37sp"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toStartOf="@+id/textView"
@@ -24,16 +25,17 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="Update Listing"
         android:textColor="#FFFFFF"
-        android:textSize="32sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.509" />
+        app:layout_constraintVertical_bias="0.47" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -57,6 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="#E4DBF0"
+                android:backgroundTint="#E4DBF0"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -67,13 +71,15 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/default_house" />
+                    android:src="@drawable/w800x533" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="House Name"
-                    android:textColor="#FFFFFF"/>
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtHouseName"
@@ -81,14 +87,16 @@
                     android:layout_height="60dp"
                     android:hint="House Name"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="House Address"
-                    android:textColor="#FFFFFF"/>
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtHouseAddress"
@@ -96,14 +104,16 @@
                     android:layout_height="60dp"
                     android:hint="House Address"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="House Area"
-                    android:textColor="#FFFFFF"/>
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtArea"
@@ -111,14 +121,16 @@
                     android:layout_height="60dp"
                     android:hint="Area (sq. m)"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="Number of Bedroom"
-                    android:textColor="#FFFFFF"/>
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtNumBedroom"
@@ -126,14 +138,16 @@
                     android:layout_height="60dp"
                     android:hint="Number of Bedroom"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="Quality (1-10)"
-                    android:textColor="#FFFFFF"/>
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtQuality"
@@ -141,14 +155,16 @@
                     android:layout_height="60dp"
                     android:hint="Quality (1-10)"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:text="Age (years)"
-                    android:textColor="#FFFFFF" />
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808" />
 
                 <EditText
                     android:id="@+id/edtAge"
@@ -156,8 +172,8 @@
                     android:layout_height="60dp"
                     android:hint="Age (in years)"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <TextView
                     android:id="@+id/edtPrice"
@@ -165,8 +181,10 @@
                     android:layout_height="60dp"
                     android:paddingBottom="10dp"
                     android:text="Old Price"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8591F5" />
+                    android:fontFamily="monospace"
+                    android:textStyle="bold"
+                    android:textColor="#0B0808"
+                    android:textColorHint="#0B0808" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -179,6 +197,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:onClick="predictPrice"
+                        android:fontFamily="monospace"
+                        android:textStyle="bold"
                         android:text="Predict New Price" />
 
                     <Button
@@ -186,6 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Predict Price"
+                        android:fontFamily="monospace"
                         android:visibility="gone" />
 
                 </LinearLayout>
