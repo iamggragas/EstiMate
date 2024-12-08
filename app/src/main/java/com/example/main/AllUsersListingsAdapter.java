@@ -16,13 +16,13 @@ import com.example.main.Utilities.Listings;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class AllUsersListingsAdapter extends RecyclerView.Adapter<AllUsersViewHolder> {
     private Context context;
     private List<Listings> myListings;
 
     private String name, phone, email, password;
 
-    public MyListingsAdapter(Context context, List<Listings> myListings, String name, String phone, String email, String password) {
+    public AllUsersListingsAdapter(Context context, List<Listings> myListings, String name, String phone, String email, String password) {
         this.context = context;
         this.myListings = myListings;
         this.name = name;
@@ -33,13 +33,13 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AllUsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.listings_recycler_item, parent, false);
-        return new MyViewHolder(view);
+        return new AllUsersViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllUsersViewHolder holder, int position) {
         holder.houseName.setText(myListings.get(position).getHouseName());
         holder.houseAddress.setText(myListings.get(position).getHouseAddress());
         holder.price.setText("Php " + myListings.get(position).getPrice() + "0");
@@ -47,7 +47,7 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MyListingsDetail.class);
+                Intent intent = new Intent(context, AllUsersListingsDetail.class);
                 intent.putExtra("houseName", myListings.get(position).getHouseName());
                 intent.putExtra("houseAddress", myListings.get(position).getHouseAddress());
                 intent.putExtra("price", Double.toString(myListings.get(position).getPrice()));
@@ -79,12 +79,12 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class AllUsersViewHolder extends RecyclerView.ViewHolder {
 
     public TextView houseName, houseAddress, price;
     public CardView recCard;
 
-    public MyViewHolder(@NonNull View itemView) {
+    public AllUsersViewHolder(@NonNull View itemView) {
         super(itemView);
 
         recCard = itemView.findViewById(R.id.recCard);

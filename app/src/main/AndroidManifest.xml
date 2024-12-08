@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Main"
         tools:targetApi="31">
         <activity
+            android:name=".AllUsersListingsDetail"
+            android:exported="false" />
+        <activity
+            android:name=".AllUsersListings"
+            android:exported="false" />
+        <activity
             android:name=".UpdateMyListings"
             android:exported="false" />
         <activity

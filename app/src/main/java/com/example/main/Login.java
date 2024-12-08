@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity {
 
                                                     Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
-                                                    Intent intent = new Intent(Login.this, Profile.class);
+                                                    Intent intent = new Intent(Login.this, AllUsersListings.class);
 
                                                     intent.putExtra("name", nameFromDB);
                                                     intent.putExtra("phone", phoneFromDB);

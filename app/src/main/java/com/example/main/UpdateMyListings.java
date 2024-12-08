@@ -131,7 +131,7 @@ public class UpdateMyListings extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdateMyListings.this, Profile.class);
+                Intent intent = new Intent(UpdateMyListings.this, AllUsersListings.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);

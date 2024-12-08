@@ -56,6 +56,7 @@ public class Profile extends AppCompatActivity {
 
         ImageButton addListingsBtn = findViewById(R.id.addListingsBtn);
         ImageView profilePic = findViewById(R.id.profilePic);
+        ImageView backBtn = findViewById(R.id.backBtn);
 
         auth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,6 +80,19 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this, AddListings.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("email", email);
+
+                startActivity(intent);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, AllUsersListings.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
