@@ -44,55 +44,94 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:autofillHints="John doe"
-                android:ems="10"
-                android:hint="@string/name"
-                android:inputType="text"
-                android:textColor="#000000"
-                android:textColorHint="#FFFFFF" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/editPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:autofillHints="0987654321"
-                android:ems="10"
-                android:hint="@string/phone"
-                android:inputType="phone"
-                android:textColor="#000000"
-                android:textColorHint="#FFFFFF"
-                android:textColorLink="#00FFFFFF" />
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="John doe"
+                    android:ems="10"
+                    android:hint="@string/name"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textColorHint="#FFFFFF" />
 
-            <EditText
-                android:id="@+id/editEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:autofillHints="johndoe@email.com"
-                android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:textColor="#000000"
-                android:textColorHint="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editPassword"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="0987654321"
+                    android:ems="10"
+                    android:hint="@string/phone"
+                    android:inputType="phone"
+                    android:textColor="#000000"
+                    android:textColorHint="#FFFFFF"
+                    android:textColorLink="#00FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="johndoe@email.com"
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000"
+                    android:textColorHint="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColor="#000000"
-                android:textColorHint="#FFFFFF" />
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/editConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnSignUp"

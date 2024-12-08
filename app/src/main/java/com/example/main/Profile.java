@@ -20,7 +20,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +37,7 @@ public class Profile extends AppCompatActivity {
     private String name, phone, email, password;
     private DatabaseReference reference;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private Button seePostsBtn, seeListingsBtn, reqPasswordResetBtn, updateBtn;
 
     @Override
@@ -54,6 +58,7 @@ public class Profile extends AppCompatActivity {
         ImageView profilePic = findViewById(R.id.profilePic);
 
         auth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
         showData();
@@ -133,6 +138,14 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
+//        AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+//
+//        user.reauthenticate(credential).addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                user.updateEmail(email).addOnCompleteListener(emailUpdateTask -> {});
+//            }
+//        });
     }
 
     public boolean isPhoneChanged() {

@@ -12,15 +12,15 @@
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="42dp"
-        android:layout_height="37dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintVertical_bias="0.035"
         app:srcCompat="@drawable/ic_backbtn" />
 
     <ImageView
@@ -200,7 +200,6 @@
         android:layout_marginTop="64dp"
         android:text="Request Password Reset"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
@@ -215,9 +214,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.046" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
