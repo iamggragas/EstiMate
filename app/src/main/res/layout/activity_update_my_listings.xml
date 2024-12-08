@@ -11,14 +11,15 @@
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="42sp"
-        android:layout_height="37sp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.317"
         app:srcCompat="@drawable/ic_backbtn" />
 
     <TextView
@@ -32,10 +33,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="0.368" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -51,9 +52,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#6BEA5F25"
             app:cardCornerRadius="30dp"
-            app:cardElevation="30dp">
+            app:cardElevation="30dp"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,107 +74,91 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/w800x533" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="House Name"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edtHouseName"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="House Name"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                    <EditText
+                        android:id="@+id/edtHouseName"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="House Name"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="House Address"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/edtHouseAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="House Address"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="House Area"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                    <EditText
+                        android:id="@+id/edtHouseAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="House Address"
+                        android:inputType="textMultiLine"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607" />
 
-                <EditText
-                    android:id="@+id/edtArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="Area (sq. m)"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="Number of Bedroom"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edtNumBedroom"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="Number of Bedroom"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                    <EditText
+                        android:id="@+id/edtArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="Area (sq. m)"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="Quality (1-10)"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/edtQuality"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="Quality (1-10)"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="Age (years)"
-                    android:fontFamily="monospace"
-                    android:textStyle="bold"
-                    android:textColor="#0B0808" />
+                    <EditText
+                        android:id="@+id/edtNumBedroom"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="Number of Bedroom"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607" />
 
-                <EditText
-                    android:id="@+id/edtAge"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="Age (in years)"
-                    android:paddingBottom="10dp"
-                    android:textColor="#0B0808"
-                    android:textColorHint="#0B0808" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtQuality"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="Quality (1-10)"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:hint="Age (in years)"
+                        android:textColor="#000000"
+                        android:textColorHint="#060607" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <TextView
                     android:id="@+id/edtPrice"
@@ -190,23 +175,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/predictPriceBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:onClick="predictPrice"
-                        android:fontFamily="monospace"
-                        android:textStyle="bold"
-                        android:text="Predict New Price" />
+                        android:text="Predict New Price"
+                        android:layout_marginBottom="10dp"/>
 
                     <Button
                         android:id="@+id/predictedPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Predict Price"
-                        android:fontFamily="monospace"
                         android:visibility="gone" />
 
                 </LinearLayout>

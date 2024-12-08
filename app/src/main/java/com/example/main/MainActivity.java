@@ -20,10 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editName, editPhone, editEmail, editPassword;
-    private String name, phone, email, password, newPassword;
+    private EditText editName, editPhone, editEmail, editPassword, editConfirmPassword;
+    private String name, phone, email, password, newPassword, confirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         editPhone = findViewById(R.id.editPhone);
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
+        editConfirmPassword = findViewById(R.id.editConfirmPassword);
 
         TextView login = findViewById(R.id.logIn);
         TextView terms = findViewById(R.id.terms);
@@ -52,13 +55,19 @@ public class MainActivity extends AppCompatActivity {
                 phone = editPhone.getText().toString().trim();
                 email = editEmail.getText().toString().trim();
                 password = editPassword.getText().toString().trim();
+                confirmPassword = editConfirmPassword.getText().toString().trim();
 
-                // hashing password
-                newPassword = new PasswordHash().hashPasswordSHA256(password);
+                if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                    checkFields(name, phone, email, password, confirmPassword);
+                }
 
-                if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                    checkFields(name, phone, email, password);
+                if (password != confirmPassword) {
+                    editConfirmPassword.setError("Passwords do not match");
+                    editConfirmPassword.requestFocus();
                 } else {
+                    // hashing password
+                    newPassword = new PasswordHash().hashPasswordSHA256(password);
+
                     // Saving to firebase authentication
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -94,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void checkFields(String name, String phone, String email, String password) {
+    private void checkFields(String name, String phone, String email, String password, String confirmPassword) {
         if (name.isEmpty()) {
             editName.setError("Please enter a name");
             editName.requestFocus();
@@ -114,5 +123,11 @@ public class MainActivity extends AppCompatActivity {
             editPassword.setError("Please enter a password");
             editPassword.requestFocus();
         }
+
+        if (confirmPassword.isEmpty()) {
+            editConfirmPassword.setError("Please confirm your password");
+            editConfirmPassword.requestFocus();
+        }
+
     }
 }

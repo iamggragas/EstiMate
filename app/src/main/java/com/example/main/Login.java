@@ -102,13 +102,13 @@ public class Login extends AppCompatActivity {
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(Login.this, "Logged failed", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
 
                                 } else {
-                                    editPassword.setError("Invalid Credentials");
-                                    editPassword.requestFocus();
+                                    editEmail.setError("Invalid Credentials");
+                                    editEmail.requestFocus();
                                 }
                             } else {
                                 editName.setError("User does not exist");
