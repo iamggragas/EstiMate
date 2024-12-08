@@ -59,29 +59,29 @@ public class MainActivity extends AppCompatActivity {
 
                 if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     checkFields(name, phone, email, password, confirmPassword);
-                }
-
-                if (password != confirmPassword) {
-                    editConfirmPassword.setError("Passwords do not match");
-                    editConfirmPassword.requestFocus();
                 } else {
-                    // hashing password
-                    newPassword = new PasswordHash().hashPasswordSHA256(password);
+                    if (!password.equals(confirmPassword)) {
+                        editConfirmPassword.setError("Passwords do not match");
+                        editConfirmPassword.requestFocus();
+                    } else {
+                        // hashing password
+                        newPassword = new PasswordHash().hashPasswordSHA256(password);
 
-                    // Saving to firebase authentication
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        // Saving to firebase authentication
+                        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    // Saving to realtime database
-                    User user = new User(name, phone, email, newPassword);
-                    reference.child(name).setValue(user);
+                        // Saving to realtime database
+                        User user = new User(name, phone, email, newPassword);
+                        reference.child(name).setValue(user);
 
-                    Intent intent = new Intent(MainActivity.this, Login.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });

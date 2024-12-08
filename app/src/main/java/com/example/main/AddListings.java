@@ -69,7 +69,7 @@ public class AddListings extends AppCompatActivity {
         saveListingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Listings listings = new Listings(vHouseSize, vBedroom, vQuality, vAge, price, houseName, houseAddress);
+                Listings listings = new Listings(vHouseSize, vBedroom, vQuality, vAge, price, houseName, houseAddress, name, email, phone);
                 reference.child(ownerName).child(houseName).setValue(listings);
 
                 Toast.makeText(getApplicationContext(), "Listing Saved", Toast.LENGTH_SHORT).show();
@@ -89,7 +89,7 @@ public class AddListings extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddListings.this, Profile.class);
+                Intent intent = new Intent(AddListings.this, AllUsersListings.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);

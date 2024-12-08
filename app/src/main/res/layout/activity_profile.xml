@@ -9,7 +9,6 @@
     android:backgroundTint="#BBAED5"
     tools:context=".Profile">
 
-
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="50dp"

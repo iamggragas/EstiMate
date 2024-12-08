@@ -18,6 +18,7 @@ public class MyListingsDetail extends AppCompatActivity {
 
     private TextView houseName, houseAddress, price, area, bedroom, quality, age, ownerName, phoneNumber, emailAddress;
     private String name, phone, email, password;
+    private String nameToPass, phoneToPass, emailToPass, passwordToPass;
     ImageButton backBtn;
 
     private FloatingActionButton fabMain, fabEdit, fabDelete;
@@ -26,11 +27,10 @@ public class MyListingsDetail extends AppCompatActivity {
 
     String key = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_lsitings_detail);
+        setContentView(R.layout.my_listings_detail);
 
         backBtn = findViewById(R.id.backBtn);
 
@@ -55,7 +55,7 @@ public class MyListingsDetail extends AppCompatActivity {
         if (extras != null) {
             houseName.setText(extras.getString("houseName"));
             houseAddress.setText(extras.getString("houseAddress"));
-            price.setText("Php " + extras.getString("price"));
+            price.setText("Php " + extras.getString("price") + "0");
             area.setText(extras.getString("area") + " sq, m.");
             bedroom.setText(extras.getString("bedroom") + " bedroom");
             quality.setText(extras.getString("quality") + "/10 rating");
@@ -69,6 +69,7 @@ public class MyListingsDetail extends AppCompatActivity {
             ownerName.setText(name);
             phoneNumber.setText(phone);
             emailAddress.setText(email);
+
 
             key = extras.getString("key");
         }
@@ -122,7 +123,7 @@ public class MyListingsDetail extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyListingsDetail.this, MyListings.class);
+                Intent intent = new Intent(MyListingsDetail.this, AllUsersListings.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);

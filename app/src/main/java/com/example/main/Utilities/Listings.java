@@ -7,10 +7,10 @@ public class Listings {
     double age;             // Age of the house in years
     double price;
 
-    String houseName, houseAddress;
+    String houseName, houseAddress, ownerListing, ownerEmail, ownerPhoneNumber;
     private String key;
 
-    public Listings(double size, int bedrooms, int quality, double age, double price, String houseName, String houseAddress) {
+    public Listings(double size, int bedrooms, int quality, double age, double price, String houseName, String houseAddress, String ownerListing, String ownerEmail, String ownerPhoneNumber) {
         this.size = size;
         this.bedrooms = bedrooms;
         this.quality = quality;
@@ -18,6 +18,9 @@ public class Listings {
         this.price = price;
         this.houseName = houseName;
         this.houseAddress = houseAddress;
+        this.ownerListing = ownerListing;
+        this.ownerEmail = ownerEmail;
+        this.ownerPhoneNumber = ownerPhoneNumber;
     }
 
     public Listings() {
@@ -78,6 +81,30 @@ public class Listings {
 
     public void setHouseAddress(String houseAddress) {
         this.houseAddress = houseAddress;
+    }
+
+    public String getOwnerListing() {
+        return ownerListing;
+    }
+
+    public void setOwnerListing(String ownerListing) {
+        this.ownerListing = ownerListing;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public String getOwnerPhoneNumber() {
+        return ownerPhoneNumber;
+    }
+
+    public void setOwnerPhoneNumber(String ownerPhoneNumber) {
+        this.ownerPhoneNumber = ownerPhoneNumber;
     }
 
     public String getKey() {

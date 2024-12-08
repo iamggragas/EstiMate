@@ -1,19 +1,14 @@
 package com.example.main;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -31,20 +26,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyListings extends AppCompatActivity {
+public class AllUsersListings extends AppCompatActivity {
 
     String name, phone, email, password;
+    String Aname, Aphone, Aemail, Apassword;
     RecyclerView recyclerView;
     List<Listings> myListings;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     SearchView searchView;
-    MyListingsAdapter adapter;
+    AllUsersListingsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_listings);
+        setContentView(R.layout.activity_all_users_listings);
 
         Intent intent = getIntent();
 
@@ -53,7 +49,7 @@ public class MyListings extends AppCompatActivity {
         email = intent.getStringExtra("email");
         password = intent.getStringExtra("password");
 
-        ImageButton backBtn = findViewById(R.id.backBtn);
+        ImageButton userButton = findViewById(R.id.userBtn);
         FloatingActionButton fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.searchView);
@@ -63,18 +59,24 @@ public class MyListings extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         myListings = new ArrayList<>();
-        adapter = new MyListingsAdapter(this, myListings, name, phone, email, password);
+        adapter = new AllUsersListingsAdapter(this, myListings, Aname, Aphone, Aemail, Apassword);
         recyclerView.setAdapter(adapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Listings").child(name);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Listings");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myListings.clear();
-                for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                    Listings listings = itemSnapshot.getValue(Listings.class);
-                    listings.setKey(itemSnapshot.getKey());
-                    myListings.add(listings);
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot listingSnapshot : userSnapshot.getChildren()) {
+                        Listings listings = listingSnapshot.getValue(Listings.class);
+                        Aname = listingSnapshot.getKey();
+                        Aphone = listingSnapshot.child("phone").getValue(String.class);
+                        Aemail = listingSnapshot.child("email").getValue(String.class);
+                        Apassword = listingSnapshot.child("password").getValue(String.class);
+                        listings.setKey(listingSnapshot.getKey());
+                        myListings.add(listings);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -98,10 +100,10 @@ public class MyListings extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        userButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyListings.this, Profile.class);
+                Intent intent = new Intent(AllUsersListings.this, Profile.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
@@ -115,7 +117,7 @@ public class MyListings extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyListings.this, AddListings.class);
+                Intent intent = new Intent(AllUsersListings.this, AddListings.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
