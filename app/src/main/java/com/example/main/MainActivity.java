@@ -12,13 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.main.Utilities.PasswordHash;
+import com.example.main.Utilities.PasswordValidator;
 import com.example.main.Utilities.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editName, editPhone, editEmail, editPassword, editConfirmPassword;
     private String name, phone, email, password, newPassword, confirmPassword;
+    private boolean isValidPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,23 +69,63 @@ public class MainActivity extends AppCompatActivity {
                         editConfirmPassword.setError("Passwords do not match");
                         editConfirmPassword.requestFocus();
                     } else {
-                        // hashing password
-                        newPassword = new PasswordHash().hashPasswordSHA256(password);
+                        isValidPassword = new PasswordValidator().isValidPassword(password);
 
-                        // Saving to firebase authentication
-                        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        if (isValidPassword) {
+                            // hashing password
+                            newPassword = new PasswordHash().hashPasswordSHA256(password);
 
-                        // Saving to realtime database
-                        User user = new User(name, phone, email, newPassword);
-                        reference.child(name).setValue(user);
+                            reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique email
+                                    if (snapshot.exists()) {
+                                        editEmail.setError("Email already exists");
+                                        editEmail.requestFocus();
+                                    } else {
+                                        reference.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique username
+                                                if (snapshot.exists()) {
+                                                    editName.setError("Username already exists");
+                                                    editName.requestFocus();
+                                                } else {
+                                                    // Saving to firebase authentication
+                                                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
 
-                        Intent intent = new Intent(MainActivity.this, Login.class);
-                        startActivity(intent);
+                                                    // Saving to realtime database
+                                                    User user = new User(name, phone, email, newPassword);
+                                                    reference.child(name).setValue(user);
+
+                                                    Intent intent = new Intent(MainActivity.this, Login.class);
+                                                    startActivity(intent);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        } else {
+                            editPassword.requestFocus();
+
+                            Toast.makeText(getApplicationContext(), "A valid password should be at least 8 characters long.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "It should have at least 1 upper and lowercase letters, 1 digit, and 1 special character.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Special characters include: $@!%*?&", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             }
