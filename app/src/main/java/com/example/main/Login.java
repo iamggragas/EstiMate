@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText editName, editPassword, editEmail;
-    private String name, email, password, newPassword, emailFromDB, nameFromDB, phoneFromDB;
+    private String name, email, password, newPassword, emailFromDB, nameFromDB, phoneFromDB, passwordFromDB;
     private DatabaseReference reference;
     Query checkUser;
 
@@ -79,7 +79,6 @@ public class Login extends AppCompatActivity {
 
                                 // checking if email exists
                                 if (emailFromDB.equals(email)) {
-
                                     // checking if authenticate
                                     auth.signInWithEmailAndPassword(email, password)
                                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -102,7 +101,8 @@ public class Login extends AppCompatActivity {
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                                                    editPassword.setError("Invalid Credentials");
+                                                    editPassword.requestFocus();
                                                 }
                                             });
 

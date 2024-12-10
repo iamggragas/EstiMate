@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.main.Utilities.EmailValidator;
 import com.example.main.Utilities.PasswordHash;
 import com.example.main.Utilities.PasswordValidator;
 import com.example.main.Utilities.User;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editName, editPhone, editEmail, editPassword, editConfirmPassword;
     private String name, phone, email, password, newPassword, confirmPassword;
-    private boolean isValidPassword;
+    private boolean isValidPassword, isValidEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,55 +71,61 @@ public class MainActivity extends AppCompatActivity {
                         editConfirmPassword.requestFocus();
                     } else {
                         isValidPassword = new PasswordValidator().isValidPassword(password);
+                        isValidEmail = new EmailValidator().isValidEmail(email);
 
                         if (isValidPassword) {
-                            // hashing password
-                            newPassword = new PasswordHash().hashPasswordSHA256(password);
+                            if (isValidEmail) {
+                                // hashing password
+                                newPassword = new PasswordHash().hashPasswordSHA256(password);
 
-                            reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique email
-                                    if (snapshot.exists()) {
-                                        editEmail.setError("Email already exists");
-                                        editEmail.requestFocus();
-                                    } else {
-                                        reference.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique username
-                                                if (snapshot.exists()) {
-                                                    editName.setError("Username already exists");
-                                                    editName.requestFocus();
-                                                } else {
-                                                    // Saving to firebase authentication
-                                                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                                            Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
+                                reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique email
+                                        if (snapshot.exists()) {
+                                            editEmail.setError("Email already exists");
+                                            editEmail.requestFocus();
+                                        } else {
+                                            reference.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) { // check if unique username
+                                                    if (snapshot.exists()) {
+                                                        editName.setError("Username already exists");
+                                                        editName.requestFocus();
+                                                    } else {
+                                                        // Saving to firebase authentication
+                                                        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
 
-                                                    // Saving to realtime database
-                                                    User user = new User(name, phone, email, newPassword);
-                                                    reference.child(name).setValue(user);
+                                                        // Saving to realtime database
+                                                        User user = new User(name, phone, email, newPassword);
+                                                        reference.child(name).setValue(user);
 
-                                                    Intent intent = new Intent(MainActivity.this, Login.class);
-                                                    startActivity(intent);
+                                                        Intent intent = new Intent(MainActivity.this, Login.class);
+                                                        startActivity(intent);
+                                                    }
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                            }
-                                        });
+                                                }
+                                            });
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
+                            } else {
+                                editEmail.setError("Invalid email");
+                                editEmail.requestFocus();
+                            }
                         } else {
                             editPassword.requestFocus();
 
